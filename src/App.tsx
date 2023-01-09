@@ -23,26 +23,56 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <input
-        name="title"
-        value={title}
-        onChange={(e) => setTitle(e.currentTarget.value)}
-      />
-      <button onClick={onSave}>Save</button>
-      <ul>
+    <div className="container">
+      <div className="d-flex my-5">
+        <div className="input-group flex-nowrap">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Username"
+            aria-label="Username"
+            aria-describedby="addon-wrapping"
+            name="title"
+            value={title}
+            onChange={(e) => setTitle(e.currentTarget.value)}
+          />
+        </div>
+        <button className="btn btn-sm btn-primary" onClick={onSave}>
+          Save
+        </button>
+      </div>
+      <div className="my-4">
         {todos.map((todo) => (
-          <li key={todo.id}>
-            <button onClick={() => toggle(todo.id)}>
-              {" "}
-              {todo.completed ? "Mark Not Completed" : "Mark Completed"}
-            </button>
+          <div
+            key={todo.id}
+            className="d-flex justify-content-space-between align-items-center"
+          >
+            <div className=" w-50 my-3  " style={{ color: "black" }}>
+              {todo.title}
+            </div>
+            <div>
+              <button
+                className={`btn btn-sm text-decoration-${
+                  todo.completed ? "line-through" : "none"
+                } btn-${todo.completed ? "primary" : "success"}`}
+                // style={{ textDecorationLine: 'line-through' }}
+                onClick={() => toggle(todo.id)}
+              >
+                {" "}
+                {todo.completed ? "Mark Not Completed" : "Mark Completed"}
+              </button>
 
-            <button onClick={() => onDelete(todo.id)}> Delete</button>
-            <span>{todo.title}</span>
-          </li>
+              <button
+                className="btn btn-sm btn-danger mx-1"
+                onClick={() => onDelete(todo.id)}
+              >
+                {" "}
+                Delete
+              </button>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
